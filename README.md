@@ -22,6 +22,18 @@ DeliveryMatch/
     └── package.json
 ```
 
+## Diagrams
+-  ![Use case Diagram](![Capture d'écran 2025-06-16 150040](https://github.com/user-attachments/assets/b3353500-ca20-4489-b728-3cd618211805)
+)
+
+
+-  [Classe Diagram](![Capture d'écran 2025-06-16 150107](https://github.com/user-attachments/assets/a16ca7b6-ae51-40c5-bc51-e3e4fbaaf46c)
+)
+
+
+
+
+
 ## Technologies Used
 
 ### Backend
@@ -37,7 +49,7 @@ DeliveryMatch/
 - Angular 16+
 - Bootstrap/Tailwind
 - Angular Material
-- Chart.js
+
 
 ## Setup Instructions
 
