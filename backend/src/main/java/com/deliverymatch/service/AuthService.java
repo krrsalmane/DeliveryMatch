@@ -17,19 +17,17 @@ public class AuthService {
 
     @Transactional
     public User register(RegisterRequest request) {
-        // Check if email already exists
         if (userRepository.existsByEmail(request.getEmail())) {
             throw new RuntimeException("Email already registered");
         }
 
-        // Create new user
         User user = new User();
-        user.setFirstName(request.getFirstName());
-        user.setLastName(request.getLastName());
+        user.setNom(request.getNom());
+        user.setPrenom(request.getPrenom());
         user.setEmail(request.getEmail());
         user.setPassword(passwordEncoder.encode(request.getPassword()));
+        user.setRole("USER");
 
-        // Save user
         return userRepository.save(user);
     }
-} 
+}
