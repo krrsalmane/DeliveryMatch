@@ -1,0 +1,74 @@
+package com.deliverymatch.model;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import lombok.NoArgsConstructor;
+
+import java.util.List;
+
+@Entity
+@NoArgsConstructor
+public class Annonce {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String pointDepart;
+    private String destinationFinal;
+    private String dateDepart;
+    private int capaciteDisponible;
+    private String typeMarchandise;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getPointDepart() {
+        return pointDepart;
+    }
+
+    public void setPointDepart(String pointDepart) {
+        this.pointDepart = pointDepart;
+    }
+
+    public String getDestinationFinal() {
+        return destinationFinal;
+    }
+
+    public void setDestinationFinal(String destinationFinal) {
+        this.destinationFinal = destinationFinal;
+    }
+
+    public String getDateDepart() {
+        return dateDepart;
+    }
+
+    public void setDateDepart(String dateDepart) {
+        this.dateDepart = dateDepart;
+    }
+
+    public int getCapaciteDisponible() {
+        return capaciteDisponible;
+    }
+
+    public void setCapaciteDisponible(int capaciteDisponible) {
+        this.capaciteDisponible = capaciteDisponible;
+    }
+
+    public String getTypeMarchandise() {
+        return typeMarchandise;
+    }
+
+    public void setTypeMarchandise(String typeMarchandise) {
+        this.typeMarchandise = typeMarchandise;
+    }
+
+
+
+}
