@@ -1,9 +1,6 @@
 package com.deliverymatch.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
@@ -20,6 +17,12 @@ public class Annonce {
     private String dateDepart;
     private int capaciteDisponible;
     private String typeMarchandise;
+    @ManyToOne
+    private User conducteur;
+
+    @OneToMany(mappedBy = "annonce")
+    private List<Demande> demandes;
+
 
     public Long getId() {
         return id;
