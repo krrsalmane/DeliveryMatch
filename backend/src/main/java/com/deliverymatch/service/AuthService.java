@@ -1,6 +1,6 @@
 package com.deliverymatch.service;
-
 import com.deliverymatch.dto.RegisterRequest;
+import com.deliverymatch.model.Role;
 import com.deliverymatch.model.User;
 import com.deliverymatch.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -26,8 +26,8 @@ public class AuthService {
         user.setPrenom(request.getPrenom());
         user.setEmail(request.getEmail());
         user.setPassword(passwordEncoder.encode(request.getPassword()));
-        user.setRole("USER");
-
+        user.setRole(Role.CONDUCTEUR);
         return userRepository.save(user);
     }
+
 }
