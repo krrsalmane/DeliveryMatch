@@ -7,6 +7,7 @@ import com.deliverymatch.repository.AnnonceRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+
 import java.util.List;
 
 @Service
@@ -43,5 +44,10 @@ public class AnnonceService {
         annonce.setCapaciteDisponible(request.getCapaciteDisponible());
         annonce.setTypeMarchandise(request.getTypeMarchandise());
         return annonceRepository.save(annonce);
+    }
+
+    public void deleteAnnonce(Long id) {
+        Annonce annonce = getById(id);
+        annonceRepository.delete(annonce);
     }
 }

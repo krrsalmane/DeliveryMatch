@@ -39,5 +39,11 @@ public class AnnonceController {
                                                  @RequestBody AnnonceRequest request) {
         return ResponseEntity.ok(annonceService.updateAnnonce(id, request));
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteAnnonce(@PathVariable Long id) {
+        annonceService.deleteAnnonce(id);
+        return ResponseEntity.noContent().build();
+    }
 }
 
