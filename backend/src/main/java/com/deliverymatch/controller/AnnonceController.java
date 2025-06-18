@@ -34,5 +34,10 @@ public class AnnonceController {
         return ResponseEntity.ok(annonceService.getById(id));
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<Annonce> updateAnnonce(@PathVariable Long id,
+                                                 @RequestBody AnnonceRequest request) {
+        return ResponseEntity.ok(annonceService.updateAnnonce(id, request));
+    }
 }
 

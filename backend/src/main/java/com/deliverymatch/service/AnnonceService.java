@@ -34,4 +34,14 @@ public class AnnonceService {
         return annonceRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Annonce not found"));
     }
+
+    public Annonce updateAnnonce(Long id, AnnonceRequest request) {
+        Annonce annonce = getById(id); // reuse existing method
+        annonce.setPointDepart(request.getPointDepart());
+        annonce.setDestinationFinal(request.getDestinationFinal());
+        annonce.setDateDepart(request.getDateDepart());
+        annonce.setCapaciteDisponible(request.getCapaciteDisponible());
+        annonce.setTypeMarchandise(request.getTypeMarchandise());
+        return annonceRepository.save(annonce);
+    }
 }
