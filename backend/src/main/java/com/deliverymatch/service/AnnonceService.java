@@ -7,6 +7,8 @@ import com.deliverymatch.repository.AnnonceRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class AnnonceService {
@@ -22,5 +24,14 @@ public class AnnonceService {
         annonce.setTypeMarchandise(request.getTypeMarchandise());
 
         return annonceRepository.save(annonce);
+    }
+    public List<Annonce> getAll() {
+        return annonceRepository.findAll();
+    }
+
+    // READ BY ID
+    public Annonce getById(Long id) {
+        return annonceRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Annonce not found"));
     }
 }
