@@ -1,6 +1,4 @@
 package com.deliverymatch.dto;
-
-
 import com.deliverymatch.model.Role;
 import lombok.Data;
 

@@ -1,9 +1,7 @@
 package com.deliverymatch.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import ch.qos.logback.core.status.Status;
+import jakarta.persistence.*;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
@@ -18,6 +16,10 @@ public class Demande {
     private Long id;
     private Date date;
     private DemandeStatus status;
+    @Enumerated(EnumType.STRING)
+
+    @ManyToOne
+    private Annonce annonce;
 
     public Long getId() {
         return id;

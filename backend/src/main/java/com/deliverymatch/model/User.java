@@ -1,7 +1,7 @@
 package com.deliverymatch.model;
-
 import jakarta.persistence.*;
 import lombok.Data;
+import java.util.List;
 
 @Data
 @Entity
@@ -18,6 +18,9 @@ public class User {
     private String password;
     @Enumerated(EnumType.STRING)
     private Role role;
+    @OneToMany(mappedBy = "conducteur")
+    private List<Annonce> annonces;
+
 
     public Role getRole() {
         return role;
