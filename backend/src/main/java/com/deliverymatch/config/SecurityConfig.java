@@ -1,7 +1,4 @@
 package com.deliverymatch.config;
-
-
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -20,11 +17,11 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-                .csrf(csrf -> csrf.disable())
-
+                .csrf(csrf -> csrf.disable()) // correct modern way
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/auth/register").permitAll()
-                        .anyRequest().authenticated()
+                        .requestMatchers("/api/users/update").permitAll()
+                        .anyRequest().permitAll()
                 );
 
         return http.build();
