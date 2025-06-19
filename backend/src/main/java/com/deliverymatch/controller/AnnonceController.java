@@ -1,6 +1,7 @@
 package com.deliverymatch.controller;
 import com.deliverymatch.dto.AnnonceRequest;
 import com.deliverymatch.model.Annonce;
+import com.deliverymatch.repository.AnnonceRepository;
 import com.deliverymatch.service.AnnonceService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -43,5 +44,22 @@ public class AnnonceController {
         annonceService.deleteAnnonce(id);
         return ResponseEntity.noContent().build();
     }
+
+
+    private final AnnonceRepository annonceRepository;
+
+    @GetMapping("/search")
+    public List<Annonce> searchAnnonces(
+            @RequestParam(required = false) String pointDepart,
+            @RequestParam(required = false) String destinationFinal,
+            @RequestParam(required = false) String dateDepart,
+            @RequestParam(required = false) String typeMarchandise,
+            @RequestParam(required = false) Integer capaciteMin
+    ) {
+        return annonceRepository.searchAnnonces(
+                pointDepart, destinationFinal, dateDepart, typeMarchandise, capaciteMin
+        );
+    }
+
 }
 

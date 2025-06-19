@@ -17,6 +17,7 @@ public class Annonce {
     private String dateDepart;
     private int capaciteDisponible;
     private String typeMarchandise;
+
     @ManyToOne
     private User conducteur;
 

@@ -18,6 +18,7 @@ public class User {
     private String password;
     @Enumerated(EnumType.STRING)
     private Role role;
+
     @OneToMany(mappedBy = "conducteur")
     private List<Annonce> annonces;
 
