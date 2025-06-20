@@ -71,7 +71,30 @@ public class DemandeService {
     }
 
     // Get all demandes by Expediteur (sender)
+    public List<DemandeDTO> afficherDemandesByExpediteur(Long expediteurId) {
+        User expediteur = expediteurRepository.findByIdAndRole(expediteurId, Role.EXPEDIEUR)
+                .orElseThrow(() -> new RuntimeException("Expediteur not found"));
 
+        List<Demande> demandes = demandeRepository.findByExpediteur((Expediteur) expediteur);
+
+        return demandes.stream().map(demande -> new DemandeDTO(
+                demande.getId(),
+                demande.getDate(),
+                demande.getStatus().toString(),
+                expediteur.getId(),
+                demande.getAnnonce().getId(),
+                demande.getColis().stream().map(colis -> new ColisDTO(
+                        colis.getPoids(),
+                        colis.getLongueur(),
+                        colis.getLargeur(),
+                        colis.getTypeColis()
+
+
+                )).toList()
+
+        )).toList();
+
+    }
 
     // Get all demandes by Annonce (related to a trip/driver)
     public List<DemandeDTO> afficherDemandesParAnnonce(Long annonceId) {
