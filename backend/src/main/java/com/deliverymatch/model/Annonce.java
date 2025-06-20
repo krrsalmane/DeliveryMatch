@@ -24,6 +24,21 @@ public class Annonce {
     @OneToMany(mappedBy = "annonce")
     private List<Demande> demandes;
 
+    public User getConducteur() {
+        return conducteur;
+    }
+
+    public void setConducteur(User conducteur) {
+        this.conducteur = conducteur;
+    }
+
+    public List<Demande> getDemandes() {
+        return demandes;
+    }
+
+    public void setDemandes(List<Demande> demandes) {
+        this.demandes = demandes;
+    }
 
     public Long getId() {
         return id;

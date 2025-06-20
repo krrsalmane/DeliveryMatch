@@ -4,15 +4,12 @@ import com.deliverymatch.dto.DemandeDTO;
 import com.deliverymatch.model.*;
 import com.deliverymatch.repository.AnnonceRepository;
 import com.deliverymatch.repository.DemandeRepository;
-import com.deliverymatch.repository.ExpediteurRepository;
 import com.deliverymatch.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
-import static java.util.Arrays.stream;
 import static java.util.stream.Collectors.toList;
 
 
@@ -24,11 +21,12 @@ public class DemandeService {
 
     private final UserRepository expediteurRepository;
     private final AnnonceRepository annonceRepository;
+    private final UserRepository userRepository;
 
     // Create a new demande (transport request)
     public DemandeDTO creerDemande(DemandeDTO dto) {
         // Fetch Expediteur and Annonce based on the provided IDs in the DTO
-        User expediteur = expediteurRepository.findByIdAndRole(dto.expediteurId(), Role.EXPEDIEUR)
+            User expediteur=userRepository.findByIdAndRole(dto.expediteurId(), Role.EXPEDIEUR)
                 .orElseThrow(() -> new RuntimeException("Expediteur not found"));
 
         Annonce annonce = annonceRepository.findById(dto.annonceId())
@@ -40,7 +38,7 @@ public class DemandeService {
         demande.setDate(dto.date());
         demande.setStatus(DemandeStatus.valueOf(dto.status()));
         demande.setAnnonce(annonce);
-        demande.setExpediteur((Expediteur) expediteur);
+        //demande.setExpediteur(expediteur);
 
 
         List<Colis> colisList = dto.colis().stream().map( c -> {
