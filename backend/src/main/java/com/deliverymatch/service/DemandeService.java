@@ -74,7 +74,27 @@ public class DemandeService {
 
 
     // Get all demandes by Annonce (related to a trip/driver)
+    public List<DemandeDTO> afficherDemandesParAnnonce(Long annonceId) {
+        Annonce annonce = annonceRepository.findById(annonceId)
+                .orElseThrow(() -> new RuntimeException("Annonce not found"));
 
+        List<Demande> demandes = demandeRepository.findByAnnonce(annonce);
+
+        return demandes.stream().map(demande -> new DemandeDTO(
+                demande.getId(),
+                demande.getDate(),
+                demande.getStatus().toString(),
+                demande.getExpediteur().getId(),
+                annonce.getId(),
+                demande.getColis().stream().map(colis -> new ColisDTO(
+                        colis.getPoids(),
+                        colis.getLongueur(),
+                        colis.getLargeur(),
+                        colis.getTypeColis()
+
+                )).collect(toList())
+        )).collect(toList());
+    }
 }
 
 
