@@ -1,10 +1,13 @@
 package com.deliverymatch.model;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 
 import java.util.List;
-
+@Entity
+@DiscriminatorValue("CONDUCTEUR")
 public class Conducteur extends User {
     @OneToMany(mappedBy = "conducteur", cascade = CascadeType.ALL)
     private List<Annonce> annonces;

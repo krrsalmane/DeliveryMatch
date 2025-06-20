@@ -19,7 +19,7 @@ public class Annonce {
     private String typeMarchandise;
 
     @ManyToOne
-    private User conducteur;
+    private Conducteur conducteur;
 
     @OneToMany(mappedBy = "annonce")
     private List<Demande> demandes;
@@ -28,7 +28,7 @@ public class Annonce {
         return conducteur;
     }
 
-    public void setConducteur(User conducteur) {
+    public void setConducteur(Conducteur conducteur) {
         this.conducteur = conducteur;
     }
 

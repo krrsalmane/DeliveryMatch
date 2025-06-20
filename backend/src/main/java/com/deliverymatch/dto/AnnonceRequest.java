@@ -10,6 +10,7 @@ public class AnnonceRequest {
     private String dateDepart;
     private int capaciteDisponible;
     private String typeMarchandise;
+    private long conducteurId;
 
 
     public String getPointDepart() {

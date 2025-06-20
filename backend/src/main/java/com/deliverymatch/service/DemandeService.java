@@ -4,6 +4,7 @@ import com.deliverymatch.dto.DemandeDTO;
 import com.deliverymatch.model.*;
 import com.deliverymatch.repository.AnnonceRepository;
 import com.deliverymatch.repository.DemandeRepository;
+import com.deliverymatch.repository.ExpediteurRepository;
 import com.deliverymatch.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -19,14 +20,14 @@ public class DemandeService {
 
     private final DemandeRepository demandeRepository;
 
-    private final UserRepository expediteurRepository;
+    private final ExpediteurRepository expediteurRepository;
     private final AnnonceRepository annonceRepository;
     private final UserRepository userRepository;
 
     // Create a new demande (transport request)
     public DemandeDTO creerDemande(DemandeDTO dto) {
         // Fetch Expediteur and Annonce based on the provided IDs in the DTO
-            User expediteur=userRepository.findByIdAndRole(dto.expediteurId(), Role.EXPEDIEUR)
+            Expediteur expediteur=expediteurRepository.findById(dto.expediteurId())
                 .orElseThrow(() -> new RuntimeException("Expediteur not found"));
 
         Annonce annonce = annonceRepository.findById(dto.annonceId())
@@ -38,7 +39,7 @@ public class DemandeService {
         demande.setDate(dto.date());
         demande.setStatus(DemandeStatus.valueOf(dto.status()));
         demande.setAnnonce(annonce);
-        //demande.setExpediteur(expediteur);
+        demande.setExpediteur(expediteur);
 
 
         List<Colis> colisList = dto.colis().stream().map( c -> {
@@ -70,7 +71,7 @@ public class DemandeService {
 
     // Get all demandes by Expediteur (sender)
     public List<DemandeDTO> afficherDemandesByExpediteur(Long expediteurId) {
-        User expediteur = expediteurRepository.findByIdAndRole(expediteurId, Role.EXPEDIEUR)
+        User expediteur = expediteurRepository.findById(expediteurId)
                 .orElseThrow(() -> new RuntimeException("Expediteur not found"));
 
         List<Demande> demandes = demandeRepository.findByExpediteur((Expediteur) expediteur);

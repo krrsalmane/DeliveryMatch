@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
-
+@DiscriminatorValue("EXPEDITEUR")
 public class Expediteur extends User {
 
     @OneToMany(mappedBy = "expediteur", cascade = CascadeType.ALL)
@@ -18,4 +18,5 @@ public class Expediteur extends User {
     public void setDemandes(List<Demande> demandes) {
         this.demandes = demandes;
     }
+
 }
