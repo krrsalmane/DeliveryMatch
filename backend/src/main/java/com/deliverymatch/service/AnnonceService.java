@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -18,21 +19,31 @@ public class AnnonceService {
 
     private final AnnonceRepository annonceRepository;
     private final ConducteurRepository conducteurRepository;
+
+
     public Annonce publierAnnonce(AnnonceRequest request) {
-        try {
-            Conducteur conducteur=conducteurRepository.findById(request.getConducteurId());
-            Annonce annonce = new Annonce();
-            annonce.setPointDepart(request.getPointDepart());
-            annonce.setDestinationFinal(request.getDestinationFinal());
-            annonce.setDateDepart(request.getDateDepart());
-            annonce.setCapaciteDisponible(request.getCapaciteDisponible());
-            annonce.setTypeMarchandise(request.getTypeMarchandise());
-            annonce.setConducteur(conducteur);
-            return annonceRepository.save(annonce);
-        } catch (Exception e) {
-            throw new RuntimeException("conducteur not found");
-        }
+        // This is how you should use Optional with findById:
+        Optional<Conducteur> optionalConducteur = conducteurRepository.findById(request.getConducteurId());
+
+        // If no conducteur is found, throw an exception
+        Conducteur conducteur = optionalConducteur.orElseThrow(() ->
+                new RuntimeException("Conducteur not found with ID: " + request.getConducteurId())
+        );
+
+        // Create the annonce and set its fields
+        Annonce annonce = new Annonce();
+        annonce.setPointDepart(request.getPointDepart());
+        annonce.setDestinationFinal(request.getDestinationFinal());
+        annonce.setDateDepart(request.getDateDepart());
+        annonce.setCapaciteDisponible(request.getCapaciteDisponible());
+        annonce.setTypeMarchandise(request.getTypeMarchandise());
+        annonce.setConducteur(conducteur);
+
+        // Save the annonce to the repository
+        return annonceRepository.save(annonce);
     }
+
+
     public List<Annonce> getAll() {
         return annonceRepository.findAll();
     }

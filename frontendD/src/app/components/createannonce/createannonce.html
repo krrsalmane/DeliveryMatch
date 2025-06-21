@@ -1,0 +1,32 @@
+<div class="container">
+  <h2>Créer une annonce</h2>
+  <p>Bienvenue sur le formulaire de création d'annonce.</p>
+  <form #annonceForm="ngForm" (ngSubmit)="onSubmit(annonceForm)">
+    <div>
+      <label for="conducteurId">ID Conducteur:</label>
+      <input id="conducteurId" name="conducteurId" [(ngModel)]="annonceRequest.conducteurId" type="number" required>
+    </div>
+    <div>
+      <label for="pointDepart">Point de Départ:</label>
+      <input id="pointDepart" name="pointDepart" [(ngModel)]="annonceRequest.pointDepart" required>
+    </div>
+    <div>
+      <label for="destinationFinal">Destination Finale:</label>
+      <input id="destinationFinal" name="destinationFinal" [(ngModel)]="annonceRequest.destinationFinal" required>
+    </div>
+    <div>
+      <label for="dateDepart">Date de Départ:</label>
+      <input id="dateDepart" name="dateDepart" type="datetime-local" [(ngModel)]="annonceRequest.dateDepart" required>
+    </div>
+    <div>
+      <label for="capaciteDisponible">Capacité Disponible:</label>
+      <input id="capaciteDisponible" name="capaciteDisponible" type="number" [(ngModel)]="annonceRequest.capaciteDisponible" required>
+    </div>
+    <div>
+      <label for="typeMarchandise">Type de Marchandise:</label>
+      <input id="typeMarchandise" name="typeMarchandise" [(ngModel)]="annonceRequest.typeMarchandise" required>
+    </div>
+    <button type="submit" [disabled]="!annonceForm.valid">Soumettre</button>
+  </form>
+  <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+</div>
