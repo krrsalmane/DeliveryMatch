@@ -4,8 +4,13 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-@Entity
 
+
+
+@Entity
+@Table(name = "users")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "role", discriminatorType = DiscriminatorType.STRING)
 public class User {
 
 
@@ -16,20 +21,11 @@ public class User {
     private String prenom;
     private String email;
     private String password;
-    @Enumerated(EnumType.STRING)
-    private Role role;
+//    @Enumerated(EnumType.STRING)
+//    private Role role;
 
     @OneToMany(mappedBy = "conducteur")
     private List<Annonce> annonces;
-
-
-    public Role getRole() {
-        return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
-    }
 
 
 

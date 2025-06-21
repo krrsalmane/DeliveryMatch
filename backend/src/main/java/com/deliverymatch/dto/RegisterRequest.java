@@ -9,14 +9,13 @@ public class RegisterRequest {
     private String prenom;
     private String email;
     private String password;
-    private Role role;
 
     public RegisterRequest(String nom, String prenom, String email, String password, Role role) {
         this.nom = nom;
         this.prenom = prenom;
         this.email = email;
         this.password = password;
-        this.role = role;
+
     }
 
     public String getNom() {
@@ -51,11 +50,5 @@ public class RegisterRequest {
         this.password = password;
     }
 
-    public Role getRole() {
-        return role;
-    }
 
-    public void setRole(Role role) {
-        this.role = role;
-    }
 }

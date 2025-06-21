@@ -1,10 +1,10 @@
 package com.deliverymatch.model;
-
 import ch.qos.logback.core.status.Status;
 import jakarta.persistence.*;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
+import java.util.List;
 
 
 @Entity
@@ -15,11 +15,34 @@ public class Demande {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Date date;
-    private DemandeStatus status;
     @Enumerated(EnumType.STRING)
+    private DemandeStatus status;
 
     @ManyToOne
     private Annonce annonce;
+
+    @OneToMany(mappedBy = "demande", cascade = CascadeType.ALL)
+    private List<Colis> colis;
+
+    @ManyToOne
+    @JoinColumn(name = "expediteur_id")
+    private Expediteur expediteur;
+
+    public List<Colis> getColis() {
+        return colis;
+    }
+
+    public void setColis(List<Colis> colis) {
+        this.colis = colis;
+    }
+
+    public Expediteur getExpediteur() {
+        return expediteur;
+    }
+
+    public void setExpediteur(Expediteur expediteur) {
+        this.expediteur = expediteur;
+    }
 
     public Long getId() {
         return id;
@@ -43,5 +66,13 @@ public class Demande {
 
     public void setStatus(DemandeStatus status) {
         this.status = status;
+    }
+
+    public Annonce getAnnonce() {
+        return annonce;
+    }
+
+    public void setAnnonce(Annonce annonce) {
+        this.annonce = annonce;
     }
 }
