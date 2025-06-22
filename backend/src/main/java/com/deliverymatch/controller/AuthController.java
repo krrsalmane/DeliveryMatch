@@ -8,12 +8,14 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/auth")
 @RequiredArgsConstructor
+@CrossOrigin(origins = "*")
 public class AuthController {
     private final AuthService authService;
 
-    @PostMapping("/register")
-    public ResponseEntity<?> register(@RequestBody RegisterRequest request) {
-        authService.register(request);
+    @PostMapping("/register/{role}")
+
+    public ResponseEntity<?> register(@RequestBody RegisterRequest request, @PathVariable String role) {
+        authService.register(request,role);
         return ResponseEntity.ok("register success");
     }
 } 

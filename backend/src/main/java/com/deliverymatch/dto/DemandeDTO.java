@@ -1,7 +1,25 @@
 package com.deliverymatch.dto;
 
-public class DemandeDTO {
-    private String status;
-    private String dateDemande;
-}
+
+import com.deliverymatch.model.Annonce;
+import com.deliverymatch.model.DemandeStatus;
+
+import java.util.Date;
+import java.util.List;
+
+public record DemandeDTO (
+        Long id,
+        Date date,
+        String status,
+        Long expediteurId,
+        Long annonceId,
+        List<ColisDTO> colis
+) { }
+
+
+
+
+
+
+
 

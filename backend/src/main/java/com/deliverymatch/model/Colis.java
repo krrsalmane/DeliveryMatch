@@ -1,12 +1,30 @@
 package com.deliverymatch.model;
+import jakarta.persistence.*;
+import lombok.NoArgsConstructor;
 
+
+@Entity
+@NoArgsConstructor
 public class Colis {
-
+@Id
+@GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private double poids;
     private double longueur;
     private double largeur;
     private String typeColis;
+
+    @ManyToOne
+    @JoinColumn(name = "demande_id")  // this matches `mappedBy = "demande"` in Demande
+    private Demande demande;
+
+    public Demande getDemande() {
+        return demande;
+    }
+
+    public void setDemande(Demande demande) {
+        this.demande = demande;
+    }
 
     public Long getId() {
         return id;

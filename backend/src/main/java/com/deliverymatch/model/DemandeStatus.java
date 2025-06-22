@@ -1,7 +1,7 @@
 package com.deliverymatch.model;
 
 public enum DemandeStatus {
- EN_ATTENTE_VALIDATION,
+ EN_ATTENTE,
  VALIDEE,
  REJETEE
 }
